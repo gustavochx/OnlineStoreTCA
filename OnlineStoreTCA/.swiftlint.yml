@@ -44,6 +44,8 @@ disabled_rules:
   - type_contents_order
   - unused_capture_list
   - vertical_whitespace_between_cases
+  - let_var_whitespace
+  - trailing_whitespace
 
 # Configurations
 attributes:
@@ -51,6 +53,8 @@ attributes:
     - "@ConfigurationElement"
     - "@OptionGroup"
     - "@RuleConfigurationDescriptionBuilder"
+  always_on_same_line:
+    - "@Dependency"
 balanced_xctest_lifecycle: &unit_test_configuration
   test_parent_classes:
     - SwiftLintTestCase
@@ -80,7 +84,7 @@ redundant_type_annotation:
   consider_default_literal_types_redundant: true
 single_test_class: *unit_test_configuration
 trailing_comma:
-  mandatory_comma: true
+  mandatory_comma: false
 type_body_length: 400
 unneeded_override:
   affect_initializers: true
@@ -88,26 +92,3 @@ unused_import:
   always_keep_imports:
     - SwiftSyntaxBuilder # we can't detect uses of string interpolation of swift syntax nodes
     - SwiftLintFramework # now that this is a wrapper around other modules, don't treat as unused
-
-# Custom rules
-custom_rules:
-  rule_id:
-    included: Source/SwiftLintBuiltInRules/Rules/.+/\w+\.swift
-    name: Rule ID
-    message: Rule IDs must be all lowercase, snake case and not end with `rule`
-    regex: ^\s+identifier:\s*("\w+_rule"|"\S*[^a-z_]\S*")
-    severity: error
-  fatal_error:
-    name: Fatal Error
-    excluded: "Tests/*"
-    message: Prefer using `queuedFatalError` over `fatalError` to avoid leaking compiler host machine paths.
-    regex: \bfatalError\b
-    match_kinds:
-      - identifier
-    severity: error
-  rule_test_function:
-    included: Tests/SwiftLintFrameworkTests/RulesTests.swift
-    name: Rule Test Function
-    message: Rule Test Function mustn't end with `rule`
-    regex: func\s*test\w+(r|R)ule\(\)
-    severity: error
