@@ -312,6 +312,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		154C46152CBF2D67002E453F /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 12;
 			files = (
 			);
@@ -696,7 +697,7 @@
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.15.0;
+				minimumVersion = 1.16.0;
 			};
 		};
 		154C46142CBF2971002E453F /* XCRemoteSwiftPackageReference "SwiftLint" */ = {

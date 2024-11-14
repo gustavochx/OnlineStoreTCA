@@ -12,29 +12,27 @@ struct ProductDetailsView: View {
     let store: StoreOf<ProductDomain>
     
     var body: some View {
-        WithPerceptionTracking {
-            VStack {
-                AsyncImage(url: URL(string: store.product.imageString)) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 300)
-                } placeholder: {
-                    ProgressView()
-                        .frame(height: 300)
-                }
-                VStack(alignment: .leading) {
-                    Text(store.product.title)
-                    HStack {
-                        Text("$\(store.product.currency.description)")
-                            .fontWeight(.bold)
-                        Spacer()
-                    }
-                }
-                .font(.system(size: 20))
+        VStack {
+            AsyncImage(url: URL(string: store.product.imageString)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 300)
+            } placeholder: {
+                ProgressView()
+                    .frame(height: 300)
             }
-            .padding(20)
+            VStack(alignment: .leading) {
+                Text(store.product.title)
+                HStack {
+                    Text("$\(store.product.currency.description)")
+                        .fontWeight(.bold)
+                    Spacer()
+                }
+            }
+            .font(.system(size: 20))
         }
+        .padding(20)
     }
 }
 
@@ -48,5 +46,4 @@ struct ProductDetailsView: View {
             reducer: { ProductDomain() }
         )
     )
-    .previewLayout(.fixed(width: 300, height: 300))
 }
